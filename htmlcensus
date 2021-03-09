@@ -1,0 +1,9 @@
+<div class="qeel-groups">
+<a href="#">Ludzie <span id="census_Ludzie" class="censusValue"><span class="censusCount">0</span></span></a>
+<a href="#">Pradawni <span id="census_Pradawni" class="censusValue"><span class="censusCount">0</span></span></a>
+<a href="/g5-yokai">Yokai <span id="censusYokai" class="censusValue"><span class="censusCount">0</span></span></a>
+<a href="#">Hanyou <span id="census_Hanyou" class="censusValue"><span class="censusCount">0</span></span></a>
+<a href="#">Gobliny <span id="census_Gobliny" class="censusValue"><span class="censusCount">0</span></span></a>
+<a href="#">Daishin <span id="census_Daishin" class="censusValue"><span class="censusCount">0</span></span></a>
+<a href="#">Inne Istoty <span id="census_Inne Istoty" class="censusValue"><span class="censusCount">0</span></span></a>
+<a href="#">NPC <span id="census_NPC" class="censusValue"><span class="censusCount">0</span></span></a></div></div> 
