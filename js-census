@@ -1,0 +1,73 @@
+<script type="text/javascript">//<![CDATA[
+(function() {
+  window._faCensus = {
+    title : 'Group census', // main title
+   
+    // syntax : 'GROUP_NAME' : 'GROUP_ID'
+    groups : {
+      'Hanyou' : 6,
+      'Pradawni' : 2,
+      'Yokai' : 5,
+      'Ludzie' : 4,
+      'Daishin' : 3,
+      'Gobliny' : 7,
+      'Inne Istoty' : 8,
+      'NPC' : 13
+    },
+ 
+    // get group member count from AJAX or storage
+    getCount : function(id, callback) {
+      var count = 0, pages, storage = window.localStorage;
+ 
+      if (storage && storage['group_count_' + id] && storage['group_count_' + id + '_exp'] > +new Date - 1*60*60*1000) callback(storage['group_count_' + id]);
+      else jQuery.get('/g' + id + '-?change_version=prosilver', function(d) {
+        count = jQuery('.forumbg-table a[href^="/u"]', d).length;
+        pages = jQuery('.pagination span a:not(.pag-img):last', d);
+ 
+ 
+        if (pages[0]) {
+          pages = +jQuery(pages).text();
+          count = count * pages;
+        }
+ 
+        if (storage) {
+          storage['group_count_' + id] = count;
+          storage['group_count_' + id + '_exp'] = +new Date;
+        }
+ 
+        callback(count);
+      });
+    }
+  };
+ 
+  var census = document.createElement('DIV'),
+      node = document.getElementById('censusNode'),
+      i,
+      row;
+  census.id = 'faCensus';
+  census.innerHTML = '<div id="censusMainTitle">' + _faCensus.title + '</div>';
+ 
+  // set content
+  for (i in _faCensus.groups) {
+    row = document.createElement('DIV');
+    row.innerHTML = 'loading...';
+    row.className = 'censusRow';
+ 
+    _faCensus.getCount(_faCensus.groups[i], function(count) {
+      row.innerHTML = '<span class="censusTitle">' + i + '</span><span id="census_' + i.replace(/\s/g, '_') + '" class="censusValue"><span class="censusCount">' + count + '</span></span>';
+    });
+ 
+    census.appendChild(row); // add the row to the census
+  }
+ 
+  censusNode.appendChild(census); // append the census to the drop point
+})();
+// par ange tuteur
+//]]>
+  
+<script type="text/javascript">  
+getGroupCount(1, function(count) {
+  var node = document.getElementById('censusYokai');
+  node.innerHTML = '<span class="memberCount">' + count + '</span>';
+  node.style.width = count * 2 + 'px';
+});</script>   
